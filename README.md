@@ -117,7 +117,60 @@ The frontend will run on `http://localhost:5173`
 - `POST /api/contacts` - Submit new contact form
 - `GET /` - Serve homepage
 
-## 📧 Contact
+## � Environment Variables
+
+### Backend
+Create a `.env` file in the `backend/` directory:
+```
+MONGO_URI=mongodb+srv://<username>:<password>@<cluster>.mongodb.net/?appName=<app_name>
+FLASK_ENV=development
+```
+
+### Frontend
+No specific `.env` file required for basic setup. API calls use `http://localhost:5000` in development.
+
+## 🚀 Deployment
+
+### Vercel Deployment (Frontend)
+
+1. Push your code to GitHub
+2. Connect your GitHub repository to Vercel
+3. Vercel automatically detects Vite configuration
+4. Deploy settings:
+   - **Framework**: Vite
+   - **Build Command**: `npm run build`
+   - **Output Directory**: `dist`
+
+The `postinstall` script in `package.json` automatically sets executable permissions for build tools.
+
+### Heroku/Railway Deployment (Backend)
+
+1. Deploy the `backend/` directory
+2. Set environment variables in deployment platform
+3. Ensure MongoDB connection string is configured
+
+## 🐛 Troubleshooting
+
+### Vercel Build Errors
+- **Permission Denied Error**: The `postinstall` script in `package.json` automatically fixes this
+- **Peer Dependency Conflicts**: Removed incompatible packages (react-simple-maps, topojson-client, world-atlas)
+
+### Local Development Issues
+- **Port Already in Use**: Change port in `vite.config.js` (frontend) or `app.py` (backend)
+- **MongoDB Connection Failed**: Verify `MONGO_URI` and network access in MongoDB Atlas
+- **CORS Issues**: Ensure backend is running and Flask-CORS is configured
+
+## 📦 Dependencies
+
+### Removed Packages
+The following packages were removed due to React 18 compatibility:
+- `react-simple-maps` (only supports React 16)
+- `topojson-client` (dependency of react-simple-maps)
+- `world-atlas` (dependency of react-simple-maps)
+
+Use `react-leaflet` for interactive map functionality.
+
+## �📧 Contact
 
 For questions or support, please use the contact form on the website or reach out to the development team.
 
